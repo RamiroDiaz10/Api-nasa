@@ -1,99 +1,96 @@
+const urlApi = "https://api.nasa.gov/planetary/apod?api_key=u1K0n7IrA5iR8kLlhnZxnqoQTEkw7Q4W6FtVZUeG"
 
-let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-let pokemonActual = null;
+let apodHoy = null;
 
-async function searchPokemon() {
-  const nombrePokemon = document.getElementById("pokemon").value.trim();
-  const contenedorResultado = document.getElementById("resultado");
+async function obtenerApod(fecha = "") {
 
-  if (!nombrePokemon) return;
+    try {
 
-  try {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${nombrePokemon.toLowerCase()}`,
-    );
+        let url = urlApi;
 
-    if (!response.ok) {
-      throw new Error("Pokémon no encontrado");
+        if (fecha) {
+            url += `&date=${fecha}`;
+        }
+
+        const respuesta = await fetch(url);
+
+        if (!respuesta.ok) {
+            throw new Error("Error al consultar la API");
+        }
+
+        const datos = await respuesta.json();
+
+        apodActual = datos;
+
+        mostrarApod(datos);
+
+    } catch (error) {
+        console.error(error);
+        alert("No se obtuvo informacion.");
     }
+}
 
-    const data = await response.json();
+function mostrarApod(datos) {
 
-    
-    pokemonActual = {
-      id: data.id,
-      nombre: data.name.toUpperCase(),
-      imagen: data.sprites.front_default,
-    };
-    
-    
-    contenedorResultado.innerHTML = `
-      <div class="card text-center shadow-sm">
-        <img src="${pokemonActual.imagen}" class="card-img-top bg-light" alt="${pokemonActual.nombre}">
-        <div class="card-body">
-          <h5 class="card-title">${pokemonActual.nombre}</h5>
-          <p class="card-text">Nº ${pokemonActual.id}</p>
-        </div>
-      </div>
+    document.getElementById("titulo").textContent =
+        datos.title;
+
+    document.getElementById("fecha").textContent =
+        datos.date;
+
+    document.getElementById("descripcion").textContent =
+        datos.explanation;
+
+    const contenido =
+        document.getElementById("contenido");
+
+    if (datos.media_type === "image") {
+
+        contenido.innerHTML = `
+            <img
+                src="${datos.url}"
+                alt="${datos.title}"
+                width="600"
+            >
+        `;
+
+    } else if (datos.media_type === "video") {
+
+        contenido.innerHTML = `
+            <iframe
+                src="${datos.url}"
+                width="600"
+                height="400"
+                allowfullscreen>
+            </iframe>
+        `;
+    }
+}
+
+async function obtenerAPOD() {
+  const response = await fetch(
+    "https://api.nasa.gov/planetary/apod?api_key=u1K0n7IrA5iR8kLlhnZxnqoQTEkw7Q4W6FtVZUeG",
+  );
+
+  const data = await response.json();
+
+  document.getElementById("titulo").textContent = data.title;
+  document.getElementById("fecha").textContent = data.date;
+  document.getElementById("descripcion").textContent = data.explanation;
+
+  const contenido = document.getElementById("contenido");
+
+  if (data.media_type === "image") {
+    contenido.innerHTML = `
+      <img src="${data.url}" width="800">
     `;
-
-  } catch (error) {
-    contenedorResultado.innerHTML = `
-      <div class="alert alert-danger text-center" role="alert">
-        ${error.message}
-      </div>
+  } else if (data.media_type === "video") {
+    contenido.innerHTML = `
+      <video width="800" controls>
+        <source src="${data.url}" type="video/mp4">
+      </video>
     `;
-    pokemonActual = null;
   }
 }
 
-function saveFavorite() {
-    
-    if (!pokemonActual) {
-        alert("Primero busca un Pokémon válido.");
-        return;
-    }
-
-    
-    const existe = buscarFavorito(pokemonActual.id);
-
-    if (!existe) {
-        favoritos.push(pokemonActual);
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        updateFavoritesList(); 
-    } else {
-        alert("Este Pokémon ya está en tus favoritos.");
-    }
-}   
-
-function buscarFavorito(id) {
-    return favoritos.find(fav => fav.id === id) || null;
-}
-
-function updateFavoritesList() {
-    const contenedor = document.getElementById("favoritos");
-    contenedor.innerHTML = "";
-
-    
-    favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
-
-    favoritos.forEach(pokemon => {
-        const col = document.createElement("div");
-        col.classList.add("col");
-
-        col.innerHTML = `
-            <div class="card h-100 text-center shadow-sm">
-                <img src="${pokemon.imagen}" class="card-img-top bg-light" alt="${pokemon.nombre}">
-                <div class="card-body">
-                    <h5 class="card-title text-capitalize">${pokemon.nombre.toLowerCase()}</h5>
-                </div>
-            </div>
-        `;
-        contenedor.appendChild(col); 
-    });
-}
-
-
-document.addEventListener("DOMContentLoaded", () => {
-    updateFavoritesList();
-});
+obtenerApod();
