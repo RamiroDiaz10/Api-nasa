@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Api Nasa</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-light">
+
+    <nav class="navbar navbar-custom bg-danger navbar-dark mb-4">
+        <div class="container justify-content-center">
+            <span class="navbar-brand fw-bold">
+                ⚡ Tus Pokémon Favoritos ⚡
+            </span>
+        </div>
+    </nav>
+
+    <div class="container py-4">
+
+        <h1 class="text-center mb-4 text-danger fw-bold">
+            INVOCA TU POKÉMON
+        </h1>
+
+        <div class="row justify-content-center mb-4 g-2">
+            <div class="col-md-6 col-12">
+                <div class="input-group">
+                    <input
+                        type="text"
+                        id="pokemon"
+                        class="form-control"
+                        placeholder="Escribe un Pokémon (ej: pikachu)"
+                    >
+                    <button
+                        class="btn btn-primary"
+                        onclick="searchPokemon()">
+                        Buscar
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-2 col-12 text-center">
+                <button
+                    class="btn btn-success w-100"
+                    onclick="saveFavorite()">
+                    ⭐ Guardar
+                </button>
+            </div>
+        </div>
+
+        <div class="row justify-content-center mb-5">
+            <div id="resultado" class="col-md-4 col-sm-6 col-12">
+                </div>
+        </div>
+
+        <hr class="my-5">
+
+        <h2 class="text-center my-4 fw-bold text-secondary">
+            ⭐ Mis Pokémon Favoritos
+        </h2>
+
+        <div
+            id="favoritos"
+            class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 pb-5">
+            </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

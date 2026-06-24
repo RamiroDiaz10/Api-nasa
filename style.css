@@ -1,0 +1,45 @@
+.pokemon-img {
+    width: 150px;
+    height: auto;
+}
+
+
+
+body {
+    background-image: linear-gradient(rgba(15, 23, 42, 0.614), rgba(15, 23, 42, 0.75)), url('/img/fondo.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+/* Barra de navegación */
+.navbar-custom {
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 203, 5, 0.6);
+    padding: 15px;
+}
+
+.card {
+    transition: transform 0.3s ease;
+    border-radius: 15px;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.card img {
+    height: 180px;
+    object-fit: contain;
+}
+
+.card-title {
+    font-weight: bold;
+    text-transform: capitalize;
+}
+
+h1 {
+    font-weight: bold;
+}
