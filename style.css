@@ -1,45 +1,255 @@
-.pokemon-img {
-    width: 150px;
-    height: auto;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
 }
 
+body{
+    font-family:'Poppins',sans-serif;
+    min-height:100vh;
 
+    background:
+    linear-gradient(rgba(0,0,0,.45),rgba(0,0,0,.6)),
+    url("imagen1.png");
 
-body {
-    background-image: linear-gradient(rgba(15, 23, 42, 0.614), rgba(15, 23, 42, 0.75)), url('/img/fondo.jpeg');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size:cover;
+    background-position:center;
+    background-attachment:fixed;
 
+    color:white;
 }
 
-/* Barra de navegación */
-.navbar-custom {
-    background: rgba(0, 0, 0, 0.45);
-    backdrop-filter: blur(10px);
-    border-bottom: 2px solid rgba(255, 203, 5, 0.6);
-    padding: 15px;
+header{
+    width:80%;
+    margin:40px auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:20px 40px;
+
+    border-radius:20px;
+
+    background:rgba(12,18,35,.4);
+
+    backdrop-filter:blur(15px);
+
+    border:1px solid rgba(118,205,255,.4);
+
+    box-shadow:
+    0 0 20px rgba(95,184,255,.25);
 }
 
-.card {
-    transition: transform 0.3s ease;
-    border-radius: 15px;
+.logo h1{
+    font-size:2rem;
+    font-weight:800;
+    line-height:1;
 }
 
-.card:hover {
-    transform: scale(1.05);
+.logo span{
+    color:#aab6d8;
+    letter-spacing:2px;
 }
 
-.card img {
-    height: 180px;
-    object-fit: contain;
+nav{
+    display:flex;
+    gap:25px;
 }
 
-.card-title {
-    font-weight: bold;
-    text-transform: capitalize;
+nav a{
+    text-decoration:none;
+    color:white;
+    font-weight:600;
+    transition:.3s;
 }
 
-h1 {
-    font-weight: bold;
+nav a:hover,
+nav a.active{
+    color:#68d8ff;
+    text-shadow:0 0 15px #68d8ff;
+}
+
+.hero{
+
+    width:80%;
+    margin:80px auto;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:50px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h2{
+
+    font-size:6rem;
+    line-height:0.95;
+    font-weight:800;
+
+    text-shadow:
+    0 5px 20px rgba(0,0,0,.5);
+}
+
+.hero-text p{
+    margin-top:20px;
+    font-size:1.7rem;
+    max-width:600px;
+}
+
+.hero-text button{
+
+    margin-top:40px;
+
+    background:rgba(91,190,255,.15);
+
+    color:white;
+
+    border:2px solid #73d8ff;
+
+    padding:18px 35px;
+
+    border-radius:15px;
+
+    font-size:1.1rem;
+    font-weight:700;
+
+    cursor:pointer;
+
+    backdrop-filter:blur(10px);
+
+    transition:.4s;
+
+    box-shadow:
+    0 0 20px rgba(115,216,255,.35);
+}
+
+.hero-text button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 0 30px rgba(115,216,255,.8);
+}
+
+.hero-image{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.hero-image img{
+
+    width:100%;
+    max-width:500px;
+
+    border-radius:20px;
+
+    opacity:.9;
+
+    filter:
+    drop-shadow(0 0 30px rgba(115,216,255,.5));
+}
+
+.cards{
+
+    width:80%;
+    margin:80px auto;
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:30px;
+}
+
+.card{
+
+    background:rgba(7,12,25,.55);
+
+    border:1px solid rgba(255,255,255,.08);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    padding:40px;
+
+    text-align:center;
+
+    transition:.3s;
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+    border-color:#68d8ff;
+
+    box-shadow:
+    0 0 25px rgba(104,216,255,.3);
+}
+
+.card h3{
+
+    font-size:2rem;
+    font-weight:700;
+}
+
+footer{
+
+    text-align:center;
+
+    padding:30px;
+
+    background:rgba(0,0,0,.4);
+
+    backdrop-filter:blur(10px);
+}
+
+@media(max-width:992px){
+
+    .hero{
+
+        flex-direction:column;
+        text-align:center;
+    }
+
+    .hero-text h2{
+        font-size:4rem;
+    }
+
+    .cards{
+        grid-template-columns:1fr;
+    }
+
+    header{
+
+        flex-direction:column;
+        gap:20px;
+    }
+
+    nav{
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+}
+
+@media(max-width:576px){
+
+    .hero-text h2{
+        font-size:3rem;
+    }
+
+    .hero-text p{
+        font-size:1.1rem;
+    }
+
+    header,
+    .hero,
+    .cards{
+        width:95%;
+    }
 }
