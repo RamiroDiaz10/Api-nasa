@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 
-
-
     <title>Cosmic Navigator</title>
-
 </head>
+
 <body>
 
     <div class="overlay"></div>
@@ -22,9 +23,21 @@
         </div>
 
         <nav>
-            <a href="#" class="active">HOME</a>
-            <a href="#">EXPLORE</a>
-            <a href="#">CONTACT</a>
+            <section class="apod-controls">
+
+                <h2>Explorar APOD</h2>
+
+                <input type="date" id="fechaBusqueda">
+
+                <button id="btnBuscar">
+                    Buscar
+                </button>
+
+                <button id="btnFavorito">
+                    Guardar Favorito
+                </button>
+
+            </section>
         </nav>
     </header>
 
@@ -36,48 +49,45 @@
 
                 <h2>
                     El cosmos <br>
-                
+                    te espera
                 </h2>
 
                 <p>
-                    Explora las maravillas del universo. 
+                    Explora las maravillas del universo con la Astronomy Picture of the Day.
                 </p>
 
-                <button>
-                    EMPECEMOS ✦
-                </button>
-
             </div>
 
-            <div class="hero-image">
-                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564" alt="">
-            </div>
+            <section id="resultado">
+    
+                <h2 id="titulo"></h2>
+    
+                <p id="fecha"></p>
+    
+                <div id="contenido"></div>
+    
+                <p id="descripcion"></p>
+    
+            </section>
 
         </section>
 
-        <section class="cards">
+        <section class="favorites-section">
 
-            <div class="card">
-                <h3>Estrellas</h3>
-            </div>
+            <h2>Favoritos</h2>
 
-            <div class="card">
-                <h3>Planetas</h3>
-            </div>
-
-            <div class="card">
-                <h3>Cometas</h3>
-            </div>
+            <div id="favoritos" class="favoritos-grid"></div>
 
         </section>
 
     </main>
 
     <footer>
-        <p>© 2024 COSMIC NAVIGATOR</p>
+        <p>© 2026 COSMIC NAVIGATOR</p>
     </footer>
 
     <script src="app.js"></script>
 
 </body>
+
 </html>
