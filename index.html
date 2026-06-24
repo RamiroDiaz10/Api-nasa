@@ -3,33 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NASA APOD </title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+
+
+    <title>Cosmic Navigator</title>
+
 </head>
 <body>
 
-    <h1>APOD</h1>
+    <div class="overlay"></div>
 
-    <input type="date" id="fechaBusqueda">
-    <button id="buscar">Buscar</button>
+    <header>
+        <div class="logo">
+            <h1>NASA</h1>
+            <span>EXPLORA</span>
+        </div>
 
-    <button id="btnFavorito">
-        Guardar en Favoritos
-    </button>
+        <nav>
+            <a href="#" class="active">HOME</a>
+            <a href="#">EXPLORE</a>
+            <a href="#">CONTACT</a>
+        </nav>
+    </header>
 
-    <hr>
+    <main>
 
-    <h2 id="titulo"></h2>
-    <p id="fecha"></p>
+        <section class="hero">
 
-    <div id="contenido"></div>
+            <div class="hero-text">
 
-    <p id="descripcion"></p>
+                <h2>
+                    El cosmos <br>
+                
+                </h2>
 
-    <hr>
+                <p>
+                    Explora las maravillas del universo. 
+                </p>
 
-    <h2>Favoritos</h2>
+                <button>
+                    EMPECEMOS ✦
+                </button>
 
-    <ul id="listaFavoritos"></ul>
+            </div>
+
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564" alt="">
+            </div>
+
+        </section>
+
+        <section class="cards">
+
+            <div class="card">
+                <h3>Estrellas</h3>
+            </div>
+
+            <div class="card">
+                <h3>Planetas</h3>
+            </div>
+
+            <div class="card">
+                <h3>Cometas</h3>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer>
+        <p>© 2024 COSMIC NAVIGATOR</p>
+    </footer>
 
     <script src="app.js"></script>
 
