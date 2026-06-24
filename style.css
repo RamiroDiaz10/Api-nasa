@@ -19,6 +19,102 @@ body{
     color:white;
 }
 
+/* ==========================
+   BARRA DE BÚSQUEDA FUTURISTA
+========================== */
+
+.search-box{
+    display:flex;
+    align-items:center;
+    gap:10px;
+
+    background:rgba(10,15,35,.45);
+
+    padding:8px;
+
+    border-radius:50px;
+
+    backdrop-filter:blur(15px);
+    -webkit-backdrop-filter:blur(15px);
+
+    border:1px solid rgba(104,216,255,.3);
+
+    box-shadow:
+        0 0 15px rgba(104,216,255,.15),
+        inset 0 0 10px rgba(104,216,255,.08);
+}
+
+.search-box input{
+
+    width:240px;
+
+    background:transparent;
+
+    border:none;
+    outline:none;
+
+    color:white;
+
+    padding:10px 15px;
+
+    font-size:0.95rem;
+    font-family:'Poppins',sans-serif;
+}
+
+.search-box input::placeholder{
+    color:rgba(255,255,255,.65);
+}
+
+.search-box button{
+
+    width:42px;
+    height:42px;
+
+    border:none;
+
+    border-radius:50%;
+
+    cursor:pointer;
+
+    color:white;
+    font-size:1rem;
+
+    background:linear-gradient(
+        135deg,
+        rgba(104,216,255,.35),
+        rgba(70,120,255,.25)
+    );
+
+    border:1px solid rgba(104,216,255,.4);
+
+    transition:all .3s ease;
+
+    box-shadow:
+        0 0 15px rgba(104,216,255,.25);
+}
+
+.search-box button:hover{
+
+    transform:scale(1.08);
+
+    background:#68d8ff;
+
+    color:#08111f;
+
+    box-shadow:
+        0 0 25px #68d8ff,
+        0 0 40px rgba(104,216,255,.8);
+}
+
+.search-box:focus-within{
+
+    border-color:#68d8ff;
+
+    box-shadow:
+        0 0 25px rgba(104,216,255,.4),
+        inset 0 0 15px rgba(104,216,255,.15);
+}
+
 header{
     width:80%;
     margin:40px auto;
@@ -207,6 +303,18 @@ footer{
     background:rgba(0,0,0,.4);
 
     backdrop-filter:blur(10px);
+}
+
+.card-img{
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    margin-bottom: 15px;
+}
+
+.card{
+    overflow: hidden;
 }
 
 @media(max-width:992px){
