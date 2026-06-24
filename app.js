@@ -1,5 +1,5 @@
 const llaveApi = "u1K0n7IrA5iR8kLlhnZxnqoQTEkw7Q4W6FtVZUeG";
-const urlApi =`https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`;
+const urlApi =`https://api.nasa.gov/planetary/apod?api_key=${llaveApi}`;
 
 let favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
 
