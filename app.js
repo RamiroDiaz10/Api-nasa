@@ -1,99 +1,132 @@
-
 let favoritos = JSON.parse(localStorage.getItem('favoritos')) || [];
-let pokemonActual = null;
+let apodActual = null;
 
-async function searchPokemon() {
-  const nombrePokemon = document.getElementById("pokemon").value.trim();
-  const contenedorResultado = document.getElementById("resultado");
+async function obtenerAPOD() {
 
-  if (!nombrePokemon) return;
+  const contenedorResultado =
+    document.getElementById("resultado");
 
   try {
-    const response = await fetch(
-      `https://pokeapi.co/api/v2/pokemon/${nombrePokemon.toLowerCase()}`,
+
+    const API_KEY =
+      "u1K0n7IrA5iR8kLlhnZxnqoQTEkw7Q4W6FtVZUeG";
+
+    const respuesta = await fetch(
+      `https://api.nasa.gov/planetary/apod?api_key=${API_KEY}`
     );
 
-    if (!response.ok) {
-      throw new Error("Pokémon no encontrado");
+    if (!respuesta.ok) {
+      throw new Error("No se pudo obtener la APOD");
     }
 
-    const data = await response.json();
+    const data = await respuesta.json();
 
-    
-    pokemonActual = {
-      id: data.id,
-      nombre: data.name.toUpperCase(),
-      imagen: data.sprites.front_default,
-    };
-    
-    
+    apodActual = data;
+
     contenedorResultado.innerHTML = `
       <div class="card text-center shadow-sm">
-        <img src="${pokemonActual.imagen}" class="card-img-top bg-light" alt="${pokemonActual.nombre}">
+        <img src="${data.url}" class="card-img-top bg-light" alt="${data.title}">
         <div class="card-body">
-          <h5 class="card-title">${pokemonActual.nombre}</h5>
-          <p class="card-text">Nº ${pokemonActual.id}</p>
+          <h5 class="card-title">${data.title}</h5>
+          <p class="card-text">${data.date}</p>
         </div>
       </div>
     `;
 
   } catch (error) {
+
     contenedorResultado.innerHTML = `
       <div class="alert alert-danger text-center" role="alert">
         ${error.message}
       </div>
     `;
-    pokemonActual = null;
+
+    apodActual = null;
   }
 }
 
 function saveFavorite() {
-    
-    if (!pokemonActual) {
-        alert("Primero busca un Pokémon válido.");
-        return;
-    }
 
-    
-    const existe = buscarFavorito(pokemonActual.id);
+  if (!apodActual) {
+    alert("Primero carga una APOD válida.");
+    return;
+  }
 
-    if (!existe) {
-        favoritos.push(pokemonActual);
-        localStorage.setItem('favoritos', JSON.stringify(favoritos));
-        updateFavoritesList(); 
-    } else {
-        alert("Este Pokémon ya está en tus favoritos.");
-    }
-}   
+  const existe = buscarFavorito(apodActual.date);
 
-function buscarFavorito(id) {
-    return favoritos.find(fav => fav.id === id) || null;
+  if (!existe) {
+
+    favoritos.push(apodActual);
+
+    localStorage.setItem(
+      "favoritos",
+      JSON.stringify(favoritos)
+    );
+
+    updateFavoritesList();
+
+  } else {
+    alert("Esta APOD ya está en favoritos.");
+
+  }
+}
+
+function buscarFavorito(fecha) {
+
+  return favoritos.find(
+    fav => fav.date === fecha
+  ) || null;
+
 }
 
 function updateFavoritesList() {
-    const contenedor = document.getElementById("favoritos");
-    contenedor.innerHTML = "";
 
-    
-    favoritos = JSON.parse(localStorage.getItem("favoritos")) || [];
+  const contenedor =
+    document.getElementById("favoritos");
 
-    favoritos.forEach(pokemon => {
-        const col = document.createElement("div");
-        col.classList.add("col");
+  contenedor.innerHTML = "";
 
-        col.innerHTML = `
-            <div class="card h-100 text-center shadow-sm">
-                <img src="${pokemon.imagen}" class="card-img-top bg-light" alt="${pokemon.nombre}">
-                <div class="card-body">
-                    <h5 class="card-title text-capitalize">${pokemon.nombre.toLowerCase()}</h5>
-                </div>
-            </div>
-        `;
-        contenedor.appendChild(col); 
+  favoritos =
+    JSON.parse(localStorage.getItem("favoritos"))
+    || [];
+
+  favoritos.forEach(apod => {
+
+    const col =
+      document.createElement("div");
+
+    col.classList.add("col");
+
+    col.innerHTML = `
+      <div class="card h-100 text-center shadow-sm">
+        <img src="${apod.url}" class="card-img-top bg-light" alt="${apod.title}">
+        <div class="card-body">
+          <h5 class="card-title">${apod.title}</h5>
+          <p class="card-text">${apod.date}</p>
+        </div>
+      </div>
+    `;
+
+    col.addEventListener("click", () => {
+
+      apodActual = apod;
+
+      document.getElementById("resultado").innerHTML = `
+        <div class="card text-center shadow-sm">
+          <img src="${apod.url}" class="card-img-top bg-light" alt="${apod.title}">
+          <div class="card-body">
+            <h5 class="card-title">${apod.title}</h5>
+            <p class="card-text">${apod.date}</p>
+          </div>
+        </div>
+      `;
     });
+
+    contenedor.appendChild(col);
+
+  });
 }
 
-
-document.addEventListener("DOMContentLoaded", () => {
+  document.addEventListener("DOMContentLoaded", () => {
     updateFavoritesList();
-});
+  });
